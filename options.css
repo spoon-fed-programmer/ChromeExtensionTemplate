@@ -1,20 +1,48 @@
+/* 전체 페이지 스타일 */
+html, body {
+  width: 1024px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-family: Arial, sans-serif;
+}
+
+/* 테이블 전체 스타일 */
 table {
+  width: 100%;
   border-collapse: collapse;
-  width: 1024px; /* 각 컬럼 너비 100px x 5 */
-  margin: auto;
+  margin: 20px 0;
+  font-size: 15px;
+  text-align: left;
 }
-th, td {
-  border: 1px solid black;
-  text-align: center;
-  width: 200px;
+
+/* 테이블 헤더 스타일 */
+thead th {
+  background-color: #007BFF; /* 파란색 계열 배경색 */
+  color: #dddddd; /* 검정색 계열 텍스트 색상 */
+  padding: 12px;
+  border: 1px solid #dddddd;
 }
-th {
+
+/* 테이블 바디 스타일 */
+tbody td {
+  padding: 12px;
+  border: 1px solid #dddddd;
+}
+
+/* 짝수 행 배경색 */
+tbody tr:nth-child(even) {
   background-color: #f2f2f2;
 }
-button {
-  width: 80px; /* 버튼의 너비를 적절히 설정 */
-  height: 30px; /* 버튼의 높이를 적절히 설정 */
+
+/* 테이블 행 마우스 오버 시 배경색 */
+tbody tr:hover {
+  background-color: #e9e9e9;
 }
-.input-row input {
-  width: 200px; /* 입력 필드의 너비를 적절히 설정 */
+
+.add_row_btn {
+  color: skyblue;
+  padding: 5px;
 }

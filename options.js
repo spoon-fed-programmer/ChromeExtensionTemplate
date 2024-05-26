@@ -1,4 +1,4 @@
-const addRowBtn = document.getElementById('add_row');
+const addRowBtn = document.getElementById('add_row_btn');
 addRowBtn.onclick = () => {
   console.log('add row clicked');
   addRow();
@@ -30,7 +30,7 @@ function addRow() {
   }
 
   // 새로운 행 생성
-  var tableBody = document.getElementById('table-body');
+  var tableBody = document.getElementById('table-body-stms');
   var newRow = tableBody.insertRow();
 
   var packageCell = newRow.insertCell(0);
@@ -59,7 +59,7 @@ function addRow() {
 
 function loadTableData() {
   var storedData = JSON.parse(localStorage.getItem('tableData')) || [];
-  var tableBody = document.getElementById('table-body');
+  var tableBody = document.getElementById('table-body-stms');
 
   storedData.forEach(data => {
       var newRow = tableBody.insertRow();
