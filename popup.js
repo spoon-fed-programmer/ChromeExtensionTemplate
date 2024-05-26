@@ -1,18 +1,17 @@
 function fillSearchField(data) {
-  if (data === null) return
-  
-  var searchField = document.querySelector('input[id="query"]');
-  alert(searchField)
+  if (data === null) return;
+  var searchField = document.querySelector('input[name="query"]');
+  alert(searchField);
   if (searchField) {
-    searchField.value = 'abcd';
+    searchField.value = "abcd";
   }
 }
 
 function loadTableData() {
-  var storedData = JSON.parse(localStorage.getItem('tableData')) || [];
-  var tableBody = document.getElementById('table-body');
+  var storedData = JSON.parse(localStorage.getItem("tableData")) || [];
+  var tableBody = document.getElementById("table-body");
 
-  storedData.forEach(data => {
+  storedData.forEach((data) => {
     var newRow = tableBody.insertRow();
 
     var packageCell = newRow.insertCell(0);
@@ -20,15 +19,23 @@ function loadTableData() {
 
     packageCell.textContent = data.packageName;
     actionCell.innerHTML = '<button class="insert-button">채우기</button>';
-    newRow.querySelector('.insert-button').addEventListener('click', function() {
-      chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
-        chrome.scripting.executeScript({
-          target: { tabId: tabs[0].id },
-          function: fillSearchField(data)
+    newRow
+      .querySelector(".insert-button")
+      .addEventListener("click", function () {
+        chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+          chrome.scripting.executeScript({
+            target: { tabId: tabs[0].id },
+            function: (tabArgs) => {
+              var searchField = document.querySelector('input[name="query"]');
+              if (searchField) {
+                searchField.value = tabArgs.packageName;
+              }
+            },
+            args: [data]
+          });
         });
       });
-    });
   });
 }
 
-document.addEventListener('DOMContentLoaded', loadTableData);
+document.addEventListener("DOMContentLoaded", loadTableData);
