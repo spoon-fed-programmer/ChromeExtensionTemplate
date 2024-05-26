@@ -1,0 +1,21 @@
+{
+  "manifest_version": 3,
+  "name": "Auto Fill Naver Search",
+  "version": "1.0",
+  "description": "Automatically fills the Naver search field with 'abcd' when a button is clicked in the popup.",
+  "permissions": [
+    "activeTab",
+    "scripting",
+    "storage",
+    "tabs"
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "images/star_48.png",
+      "48": "images/star_48.png",
+      "128": "images/star_48.png"
+    }
+  },
+  "options_page": "options.html"
+}
