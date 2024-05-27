@@ -10,9 +10,9 @@ function deleteRow(button) {
   var packageName = row.cells[0].textContent;
 
   // 로컬 스토리지에서 데이터 삭제
-  var storedData = JSON.parse(localStorage.getItem('tableData')) || [];
+  var storedData = loadStmsData();
   storedData = storedData.filter(data => data.packageName !== packageName);
-  localStorage.setItem('tableData', JSON.stringify(storedData));
+  storeStmsData(storedData);
 
   row.parentNode.removeChild(row);
 }
@@ -47,9 +47,9 @@ function addRow() {
   });
 
   // 로컬 스토리지에 데이터 저장
-  var storedData = JSON.parse(localStorage.getItem('tableData')) || [];
+  var storedData = loadStmsData();
   storedData.push({ packageName: packageName, resourcePath: resourcePath, stringsFileName: stringsFileName });
-  localStorage.setItem('tableData', JSON.stringify(storedData));
+  localStorage.setItem('stmsData', JSON.stringify(storedData));
 
   // 입력 필드 초기화
   document.getElementById('packageName').value = '';
@@ -58,7 +58,7 @@ function addRow() {
 }
 
 function loadTableData() {
-  var storedData = JSON.parse(localStorage.getItem('tableData')) || [];
+  var storedData = loadStmsData();
   var tableBody = document.getElementById('table-body-stms');
 
   storedData.forEach(data => {
@@ -78,5 +78,14 @@ function loadTableData() {
     });
   });
 }
+
+function loadStmsData(){
+  return JSON.parse(localStorage.getItem("stmsData")) || [];
+}
+
+function storeStmsData(target) {
+  localStorage.setItem("stmsData", JSON.stringify(target));
+}
+
 
 document.addEventListener('DOMContentLoaded', loadTableData);

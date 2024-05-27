@@ -13,7 +13,7 @@ function fillSearchField(data) {
 }
 
 function loadStmsData() {
-  var storedData = loadGerritData();
+  var storedData = loadStmsStorageData();
   var tableBody = document.getElementById("table-body");
 
   storedData.forEach((data) => {
@@ -38,7 +38,7 @@ function loadStmsData() {
 }
 
 function loadGerritData() {
-  var storedData = loadGerritData();
+  var storedData = loadGerritStorageData();
   var tableBody = document.getElementById("table-body-gerrit");
 
   storedData.forEach((data) => {
@@ -67,12 +67,12 @@ function loadTableData() {
   loadGerritData()
 }
 
-function loadGerritData(){
-  return JSON.parse(localStorage.getItem("gerritData")) || [];
+function loadStmsStorageData(){
+  return JSON.parse(localStorage.getItem("stmsData")) || [];
 }
 
-function storeGerritData(target) {
-  localStorage.setItem("gerritData", JSON.stringify(target));
+function loadGerritStorageData(){
+  return JSON.parse(localStorage.getItem("gerritData")) || [];
 }
 
 document.addEventListener("DOMContentLoaded", loadTableData);
