@@ -25,7 +25,7 @@ thead th {
 /* 테이블 바디 스타일 */
 tbody td {
   width: 100%;
-  padding: 12px;
+  padding: 6px;
   border: 1px solid #dddddd;
 }
 
