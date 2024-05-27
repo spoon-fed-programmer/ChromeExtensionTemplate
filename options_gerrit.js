@@ -10,7 +10,7 @@ function deleteGerritRow(button) {
   var nickName = row.cells[0].textContent;
 
   // 로컬 스토리지에서 데이터 삭제
-  var storedData = JSON.parse(localStorage.getItem("gerritData")) || [];
+  var storedData = loadGerritData();
   storedData = storedData.filter((data) => data.nickName !== nickName);
   localStorage.setItem("gerritData", JSON.stringify(storedData));
 
@@ -45,7 +45,7 @@ function addGerritRow() {
   });
 
   // 로컬 스토리지에 데이터 저장
-  var storedData = JSON.parse(localStorage.getItem("gerritData")) || [];
+  var storedData = loadGerritData();
   storedData.push({
     nickName: nickName,
     singleIds: singleIds,
@@ -58,7 +58,7 @@ function addGerritRow() {
 }
 
 function loadGerritTableData() {
-  var storedData = JSON.parse(localStorage.getItem("gerritData")) || [];
+  var storedData = loadGerritData();
   var tableBody = document.getElementById("table-body-gerrit");
 
   storedData.forEach((data) => {
@@ -77,6 +77,14 @@ function loadGerritTableData() {
         deleteGerritRow(this);
       });
   });
+}
+
+function loadGerritData(){
+  return JSON.parse(localStorage.getItem("gerritData")) || [];
+}
+
+function storeGerritData(target) {
+  localStorage.setItem("gerritData", JSON.stringify(target));
 }
 
 document.addEventListener("DOMContentLoaded", loadGerritTableData);

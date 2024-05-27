@@ -12,8 +12,8 @@ function fillSearchField(data) {
   }
 }
 
-function loadTableData() {
-  var storedData = JSON.parse(localStorage.getItem("tableData")) || [];
+function loadStmsData() {
+  var storedData = loadGerritData();
   var tableBody = document.getElementById("table-body");
 
   storedData.forEach((data) => {
@@ -35,6 +35,44 @@ function loadTableData() {
       });
     });
   });
+}
+
+function loadGerritData() {
+  var storedData = loadGerritData();
+  var tableBody = document.getElementById("table-body-gerrit");
+
+  storedData.forEach((data) => {
+    var newRow = tableBody.insertRow();
+    var nickNameCell = newRow.insertCell(0);
+    nickNameCell.textContent = data.nickName;
+    nickNameCell.addEventListener("click", function () {
+      chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+        chrome.scripting.executeScript({
+          target: { tabId: tabs[0].id },
+          function: (tabArgs) => {
+            var searchField = document.querySelector('input[name="query"]');
+            if (searchField) {
+              searchField.value = tabArgs.singleIds;
+            }
+          },
+          args: [data],
+        });
+      });
+    });
+  });
+}
+
+function loadTableData() {
+  loadStmsData()
+  loadGerritData()
+}
+
+function loadGerritData(){
+  return JSON.parse(localStorage.getItem("gerritData")) || [];
+}
+
+function storeGerritData(target) {
+  localStorage.setItem("gerritData", JSON.stringify(target));
 }
 
 document.addEventListener("DOMContentLoaded", loadTableData);
