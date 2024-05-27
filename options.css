@@ -42,6 +42,10 @@ tbody tr:hover {
   background-color: #e9e9e9;
 }
 
+input {
+  width: 100%;
+}
+
 .add_row_btn {
   color: skyblue;
   padding: 5px;

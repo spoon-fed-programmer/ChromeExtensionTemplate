@@ -1,4 +1,4 @@
-const addRowBtn = document.getElementById('add_row_btn');
+const addRowBtn = document.getElementById('add_stms_row_btn');
 addRowBtn.onclick = () => {
   console.log('add row clicked');
   addRow();
